@@ -1,6 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
-import ListeCategories from "../../../pages/ListeCategories";
+import ListeCategories from "../../../pages/categorie/ListeCategories";
 
 const linkClass = ({ isActive }) => `nav-link${isActive ? " is-active" : ""}`;
 
