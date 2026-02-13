@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Navbar from "./components/Navbar";
+import Header from "./components/Header";
+import CartProduit from "./components/CartProduit";
+import Categorie from "./components/Categorie";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+
+  const cartCount = 0;
+
+  const produit = {
+    img: "https://via.placeholder.com/150",
+    titre: "Produit Test",
+    price: 250
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="min-h-screen bg-neutral-50">
+      <Navbar cartCount={cartCount} />
+      <Header />
 
-export default App
+      <main>
+        <CartProduit 
+          img={produit.img}
+          titre={produit.titre}
+          price={produit.price}
+        />
+      </main>
+
+      <footer className="mt-10 border-t bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-6 text-sm text-neutral-600">
+          © {new Date().getFullYear()} Ecomerce
+        </div>
+      </footer>
+    </div>
+  );
+}
