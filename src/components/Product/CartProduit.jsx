@@ -1,5 +1,6 @@
 import React from "react";
-import "../App.css"
+import "../../App.css";
+
 
 function CartProduit({ img, titre, price }) {
   return (

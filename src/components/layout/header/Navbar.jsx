@@ -1,34 +1,29 @@
 import { NavLink, Link } from "react-router-dom";
 import { useState } from "react";
-import ListeCategories from "./ListeCategories";
+import ListeCategories from "../../../pages/ListeCategories";
 
-const linkClass = ({ isActive }) =>
-  [
-    "text-sm tracking-wide",
-    isActive ? "font-semibold" : "font-medium",
-    "hover:opacity-80",
-  ].join(" ");
+const linkClass = ({ isActive }) => `nav-link${isActive ? " is-active" : ""}`;
 
 export default function Navbar({ cartCount = 0 }) {
   const [hover, setHover] = useState(false);
 
   return (
-    <header className="py-6 w-full">
-      <div className="px-5 w-full">
-        <div className="w-full bg-neutral-100 rounded-full px-8 py-5 flex items-center justify-between">
+    <header className="navbar">
+      <div className="navbar-wrap">
+        <div className="navbar-pill">
           {/* Left */}
-          <div className="flex items-center gap-10">
+          <div className="navbar-left">
             <NavLink to="/" className={linkClass} end>
               HOME
             </NavLink>
 
             {/* CATEGORY dropdown */}
             <div
-              className="relative"
+              className="dropdown"
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
             >
-              <button className="flex items-center gap-2 text-sm font-medium tracking-wide hover:opacity-80 px-3 py-2 rounded">
+              <button className="dropdown-btn" type="button">
                 CATEGORY
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                   <path
@@ -42,7 +37,7 @@ export default function Navbar({ cartCount = 0 }) {
               </button>
 
               {hover && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-white border rounded shadow-lg z-50">
+                <div className="dropdown-menu">
                   <ListeCategories />
                 </div>
               )}
@@ -50,16 +45,16 @@ export default function Navbar({ cartCount = 0 }) {
           </div>
 
           {/* Center Logo */}
-          <Link to="/" className="flex items-center justify-center">
+          <Link to="/" className="navbar-center">
             <img
-              src="/logo.png" // ✅ Logo dans dossier public
+              src="/logo.png"
               alt="Logo"
-              className="h-10 w-auto object-contain"
+              className="navbar-logo"
             />
           </Link>
 
           {/* Right icons */}
-          <div className="flex items-center gap-6">
+          <div className="navbar-right">
             <IconButton label="Search">
               <SearchIcon />
             </IconButton>
@@ -73,13 +68,9 @@ export default function Navbar({ cartCount = 0 }) {
             </IconButton>
 
             <IconButton label="Cart">
-              <div className="relative">
+              <div className="cart-wrapper">
                 <CartIcon />
-                {cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 text-xs border bg-white rounded-full px-1.5">
-                    {cartCount}
-                  </span>
-                )}
+                {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
               </div>
             </IconButton>
           </div>
@@ -91,12 +82,7 @@ export default function Navbar({ cartCount = 0 }) {
 
 function IconButton({ children, label }) {
   return (
-    <button
-      className="hover:opacity-80"
-      aria-label={label}
-      title={label}
-      type="button"
-    >
+    <button className="icon-btn" aria-label={label} title={label} type="button">
       {children}
     </button>
   );

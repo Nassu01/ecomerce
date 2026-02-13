@@ -1,7 +1,6 @@
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import CartProduit from "./components/CartProduit";
-import Categorie from "./components/Categorie";
+import Navbar from "./components/layout/header/Navbar";
+import Header from "./components/layout/header/Header";
+import CartProduit from "./components/Product/CartProduit";
 
 export default function App() {
 
@@ -16,9 +15,13 @@ export default function App() {
   return (
     <div className="min-h-screen bg-neutral-50">
       <Navbar cartCount={cartCount} />
-      <Header />
 
-      <main>
+      <Header 
+        title="Produit"
+        subtitle="Détails du produit"
+      />
+
+      <main className="p-6">
         <CartProduit 
           img={produit.img}
           titre={produit.titre}

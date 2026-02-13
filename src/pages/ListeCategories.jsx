@@ -1,11 +1,7 @@
-import React from "react";
 import Categorie from "./Categorie";
 
 const categories = [
-  {
-    icon: "📱",
-    name: "Téléphone & Tablette",
-  },
+  { icon: "📱", name: "Téléphone & Tablette" },
   { icon: "📺", name: "TV & High Tech" },
   { icon: "💻", name: "Informatique" },
   { icon: "🏠", name: "Maison, Cuisine & Bureau" },
@@ -30,7 +26,7 @@ const categories = [
 
 function ListeCategories() {
   return (
-    <div className="flex flex-col">
+    <div className="liste-categories">
       {categories.map((cat, i) => (
         <Categorie key={i} icon={cat.icon} name={cat.name} />
       ))}
