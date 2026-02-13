@@ -1,6 +1,7 @@
 import Navbar from "./components/layout/header/Navbar";
 import Header from "./components/layout/header/Header";
 import CartProduit from "./components/Product/CartProduit";
+import Footer from "./components/layout/footer/Footer";
 
 export default function App() {
 
@@ -29,11 +30,7 @@ export default function App() {
         />
       </main>
 
-      <footer className="mt-10 border-t bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-6 text-sm text-neutral-600">
-          © {new Date().getFullYear()} Ecomerce
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
