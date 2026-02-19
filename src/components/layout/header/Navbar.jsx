@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ListeCategories from "../../../pages/categorie/ListeCategories";
 
@@ -6,6 +6,7 @@ const linkClass = ({ isActive }) => `nav-link${isActive ? " is-active" : ""}`;
 
 export default function Navbar({ cartCount = 0 }) {
   const [hover, setHover] = useState(false);
+   const navigate = useNavigate(); 
 
   return (
     <header className="navbar">
@@ -67,12 +68,16 @@ export default function Navbar({ cartCount = 0 }) {
               <HeartIcon />
             </IconButton>
 
-            <IconButton label="Cart">
-              <div className="cart-wrapper">
-                <CartIcon />
-                {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
-              </div>
-            </IconButton>
+            <IconButton
+  label="Cart"
+  onClick={() => navigate("/cart")}   // 👈 change route if needed
+>
+  <div className="cart-wrapper">
+    <CartIcon />
+    {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+  </div>
+</IconButton>
+
           </div>
         </div>
       </div>
@@ -80,13 +85,20 @@ export default function Navbar({ cartCount = 0 }) {
   );
 }
 
-function IconButton({ children, label }) {
+function IconButton({ children, label, onClick }) {
   return (
-    <button className="icon-btn" aria-label={label} title={label} type="button">
+    <button
+      className="icon-btn"
+      aria-label={label}
+      title={label}
+      type="button"
+      onClick={onClick}   // 👈 add this
+    >
       {children}
     </button>
   );
 }
+
 
 /* Icons */
 function SearchIcon() {

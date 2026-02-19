@@ -1,35 +1,25 @@
+// src/App.jsx
+import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import Navbar from "./components/layout/header/Navbar";
-import Header from "./components/layout/header/Header";
-import CartProduit from "./components/Product/CartProduit";
 import Footer from "./components/layout/footer/Footer";
 
+import Home from "./components/layout/home/Home.jsx";
+import Panier from "./pages/panier/Panier";
+import Order from "./pages/panier/Order";
+
 export default function App() {
-
-  const cartCount = 0;
-
-  const produit = {
-    img: "https://via.placeholder.com/150",
-    titre: "Produit Test",
-    price: 250
-  };
+  const cartCount = useSelector((state) => state.cart?.totalQuantity ?? 0);
 
   return (
     <div className="min-h-screen bg-neutral-50">
       <Navbar cartCount={cartCount} />
-
-      <Header 
-        title="Produit"
-        subtitle="Détails du produit"
-      />
-
-      <main className="p-6">
-        <CartProduit 
-          img={produit.img}
-          titre={produit.titre}
-          price={produit.price}
-        />
-      </main>
-
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Panier />} />
+        <Route path="/order" element={<Order />} />
+      </Routes>
       <Footer />
     </div>
   );
