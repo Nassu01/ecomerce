@@ -8,6 +8,8 @@ import Footer from "./components/layout/footer/Footer";
 import Home from "./components/layout/home/Home.jsx";
 import Panier from "./pages/panier/Panier";
 import Order from "./pages/panier/Order";
+import Favorite from "./pages/favorite/Favorite";
+
 
 export default function App() {
   const cartCount = useSelector((state) => state.cart?.totalQuantity ?? 0);
@@ -19,6 +21,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Panier />} />
         <Route path="/order" element={<Order />} />
+        <Route path="/favorite" element={<Favorite />} />
+
       </Routes>
       <Footer />
     </div>

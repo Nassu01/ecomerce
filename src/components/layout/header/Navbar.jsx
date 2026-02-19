@@ -64,9 +64,10 @@ export default function Navbar({ cartCount = 0 }) {
               <UserIcon />
             </IconButton>
 
-            <IconButton label="Wishlist">
-              <HeartIcon />
-            </IconButton>
+            <IconButton label="Wishlist" onClick={() => navigate("/favorite")}>
+  <HeartIcon />
+</IconButton>
+
 
             <IconButton
   label="Cart"

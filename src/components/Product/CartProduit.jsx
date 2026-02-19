@@ -1,11 +1,15 @@
-// src/components/Product/CartProduit.jsx
 import React from "react";
 import "../../App.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart, getCartTotals } from "../../redux/CartSlice";
+import { toggleFavorite } from "../../redux/FavoriteSlice";
 
 function CartProduit({ id, img, titre, price }) {
   const dispatch = useDispatch();
+
+  const isFav = useSelector((state) =>
+    state.favorite?.items?.some((p) => p.id === id)
+  );
 
   const handleAdd = () => {
     if (id == null) {
@@ -21,9 +25,18 @@ function CartProduit({ id, img, titre, price }) {
         image: img,
       })
     );
-
-    // keep totals updated
     dispatch(getCartTotals());
+  };
+
+  const handleFav = () => {
+    dispatch(
+      toggleFavorite({
+        id,
+        name: titre,
+        price: Number(price),
+        image: img,
+      })
+    );
   };
 
   return (
@@ -38,9 +51,21 @@ function CartProduit({ id, img, titre, price }) {
         <p>avis</p>
       </div>
 
-      <button type="button" onClick={handleAdd}>
-        Ajouter au panier
-      </button>
+      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+        <button type="button" onClick={handleAdd}>
+          Ajouter au panier
+        </button>
+
+        <button
+          type="button"
+          onClick={handleFav}
+          className={`fav-btn ${isFav ? "is-fav" : ""}`}
+          aria-label="Add to favorites"
+          title="Favorite"
+        >
+          {isFav ? "♥" : "♡"}
+        </button>
+      </div>
     </div>
   );
 }
